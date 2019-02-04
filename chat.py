@@ -5,15 +5,15 @@ import gensim
 import nltk
 from keras.models import load_model
 
-model=load_model('LSTM500.h5')
-model = gensim.models.KeyedVectors.load_word2vec_format("GoogleNews-vectors-negative300.bin",binary=True)
+mod = load_model('LSTM500.h5')
+mod = gensim.models.KeyedVectors.load_word2vec_format("GoogleNews-vectors-negative300.bin",binary=True)
 
 while(True):
     x=str(input("Enter the message:"));
     sentend=np.ones((300,),dtype=np.float32) 
 
     sent=nltk.word_tokenize(x.lower())
-    sentvec = [model[w] for w in sent if w in model.wv.vocab]
+    sentvec = [mod[w] for w in sent if w in mod.wv.vocab]
 
     sentvec[14:]=[]
     sentvec.append(sentend)
@@ -22,7 +22,7 @@ while(True):
             sentvec.append(sentend) 
     sentvec=np.array([sentvec])
     
-    predictions = model.predict(sentvec)
+    predictions = mod.predict(sentvec)
     outputlist=[mod.most_similar([predictions[0][i]])[0][0] for i in range(20)]
     output=' '.join(outputlist)
     print(output)

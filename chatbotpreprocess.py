@@ -22,5 +22,5 @@ model.add(LSTM(output_dim=300,input_shape=x_train.shape[1:],return_sequences=Tru
 model.add(LSTM(output_dim=300,input_shape=x_train.shape[1:],return_sequences=True, init='glorot_normal', inner_init='glorot_normal', activation='sigmoid'))
 model.compile(loss='cosine_proximity', optimizer='adam', metrics=['accuracy'])
 
-h = model.fit(x_train, y_train, nb_epoch=10,validation_data=(x_test, y_test))
+h = model.fit(x_train, y_train, nb_epoch=300,validation_data=(x_test, y_test))
 model.save('LSTM500.h5');
